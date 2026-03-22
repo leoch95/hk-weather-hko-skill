@@ -1,5 +1,7 @@
 name: Release
 
+# Note: publish is gated at step-level to avoid workflow validation limits.
+
 on:
   push:
     tags:
