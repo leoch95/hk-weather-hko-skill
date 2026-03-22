@@ -141,10 +141,10 @@ python3 {baseDir}/scripts/fetch_weather.py --type current --json
 ## 注意事項
 
 1. **使用條款**:
-   - 使用／再分發資料須遵守香港天文台網站資料使用條件；**商業用途可能需要天文台書面授權**（見 `references/api-docs.md`）。
-   - 須註明資料來源為「香港天文台」，並按需要展示相關免責聲明（見 `references/terms-and-attribution.md`）。
+   - 本專案代碼（Code）以 MIT 等開源授權釋出；資料使用受香港天文台使用條款約束，商業用途可能需要天文台書面授權（見 references/api-docs.md）。
+   - 請於輸出中清楚註明資料來源為「香港天文台」，並必要時展示免責聲明（見 references/terms-and-attribution.md）。
    - 不可用於航空、航海等安全關鍵應用。
-   - 不可誤導用戶認為本項目與香港天文台有任何合作或關聯。
+   - 不可誤導用戶認為本專案與香港天文台有正式合作或背後授權。
 
 2. **錯誤處理**:
    - API 可能返回 404 或其他 HTTP 錯誤
