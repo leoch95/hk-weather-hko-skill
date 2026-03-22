@@ -1,0 +1,10 @@
+{
+  "WFIRE": {
+    "name": "火災危險警告",
+    "code": "WFIREY",
+    "type": "黃色",
+    "actionCode": "ISSUE",
+    "issueTime": "2026-03-22T10:45:00+08:00",
+    "updateTime": "2026-03-22T10:45:00+08:00"
+  }
+}
