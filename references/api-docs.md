@@ -128,12 +128,15 @@ curl -s "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=fl
 curl -s "https://data.weather.gov.hk/weatherAPI/opendata/weather.php?dataType=warnsum&lang=tc" | jq
 ```
 
-## 使用條款
+## 使用條款（重要）
 
-- ✅ 免費用於商業及非商業用途
-- ✅ 須註明資料來源為「香港天文台」
-- ❌ 不可用於航空、航海等安全關鍵應用
-- ❌ 不可誤導用戶認為與天文台有關聯
+- 使用者必須遵守香港天文台／香港特別行政區政府對「天文台網站資料」的使用條件（尤其商業用途）。
+  - 知識產權公告／免責聲明：https://www.hko.gov.hk/tc/readme/readme.htm
+  - 非商業用途使用條件：https://www.hko.gov.hk/tc/appweb/applink.htm
+  - 商業用途使用條件：https://www.hko.gov.hk/tc/appweb/commercial.htm
+- 一般展示／轉載建議：最少保留「資料來源：香港天文台」及相關免責聲明（詳見 `references/terms-and-attribution.md`）。
+- ❌ 不建議用於航空、航海或其他安全關鍵應用。
+- ❌ 不可誤導用戶認為本項目與香港天文台有任何合作或關聯。
 
 ## 錯誤處理
 
