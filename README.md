@@ -41,10 +41,14 @@ python3 scripts/check_warnings.py
 python3 tests/run_tests.py
 ```
 
-## 條款與免責
+## ⚠️ 授權與使用條款
 
-見 `references/terms-and-attribution.md`。
+- **Code（本 repo 代碼）**：MIT License（見 `LICENSE`）
+- **Data（天文台 API 輸出之資料）**：**不受 MIT 覆蓋**。使用、再分發、或商業應用 HKO 資料須遵守香港天文台／香港特別行政區政府的使用條件。商業用途可能需要天文台書面授權。
+  - [知識產權公告](https://www.hko.gov.hk/tc/readme/readme.htm)
+  - [非商業用途條件](https://www.hko.gov.hk/tc/appweb/applink.htm)
+  - [商業用途條件](https://www.hko.gov.hk/tc/appweb/commercial.htm)
+- 最低要求：展示「**資料來源：香港天文台**」及按官方條款展示免責聲明。
+- 本專案與香港天文台**無任何合作或關聯**。
 
-## License
-
-MIT（見 `LICENSE`）
+詳見 `references/terms-and-attribution.md`。
