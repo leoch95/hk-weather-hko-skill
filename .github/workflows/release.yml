@@ -1,10 +1,22 @@
 name: Release
 
+# Note: publish is gated at step-level to avoid workflow validation limits.
+
 on:
   push:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to release (e.g. v0.1.0). Required when running manually.'
+        required: true
+        type: string
+
+env:
+  # For tag pushes, github.ref_name is the tag.
+  # For manual runs, use the provided input.
+  RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
 
 jobs:
   verify:
@@ -12,6 +24,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RELEASE_TAG }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -32,37 +46,50 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.RELEASE_TAG }}
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.ref_name }}
+          tag_name: ${{ env.RELEASE_TAG }}
           generate_release_notes: true
 
   clawhub_publish:
     name: ClawHub Publish
     runs-on: ubuntu-latest
     needs: verify
-    if: ${{ secrets.CLAWHUB_TOKEN != '' }}
     env:
       CLAWHUB_DISABLE_TELEMETRY: '1'
+      CLAWHUB_TOKEN: ${{ secrets.CLAWHUB_TOKEN }}
     steps:
+      - name: Skip (no token configured)
+        if: ${{ env.CLAWHUB_TOKEN == '' }}
+        run: echo "CLAWHUB_TOKEN is not set; skipping ClawHub publish."
+
       - uses: actions/checkout@v4
+        if: ${{ env.CLAWHUB_TOKEN != '' }}
+        with:
+          ref: ${{ env.RELEASE_TAG }}
 
       - name: Set up Node
+        if: ${{ env.CLAWHUB_TOKEN != '' }}
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
       - name: Install ClawHub CLI
+        if: ${{ env.CLAWHUB_TOKEN != '' }}
         run: npm i -g clawhub
 
       - name: Login (token)
-        run: clawhub login --token "${{ secrets.CLAWHUB_TOKEN }}" --no-browser
+        if: ${{ env.CLAWHUB_TOKEN != '' }}
+        run: clawhub login --token "${{ env.CLAWHUB_TOKEN }}" --no-browser
 
       - name: Publish
+        if: ${{ env.CLAWHUB_TOKEN != '' }}
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
+          VERSION="${RELEASE_TAG#v}"
           clawhub publish . \
             --no-input \
             --slug hk-weather-hko \
