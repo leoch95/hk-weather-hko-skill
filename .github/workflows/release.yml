@@ -86,11 +86,18 @@ jobs:
         if: ${{ env.CLAWHUB_TOKEN != '' }}
         run: clawhub login --token "${{ env.CLAWHUB_TOKEN }}" --no-browser
 
+      - name: Prepare publish package
+        if: ${{ env.CLAWHUB_TOKEN != '' }}
+        run: |
+          rm -rf .clawhub-publish
+          mkdir -p .clawhub-publish
+          cp -R scripts references SKILL.md .clawhub-publish/
+
       - name: Publish
         if: ${{ env.CLAWHUB_TOKEN != '' }}
         run: |
           VERSION="${RELEASE_TAG#v}"
-          clawhub publish . \
+          clawhub publish ./.clawhub-publish \
             --no-input \
             --slug hk-weather-hko \
             --name "HK Weather (HKO)" \
