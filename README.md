@@ -1,0 +1,50 @@
+# hk-weather-hko-skill
+
+OpenClaw skill：使用香港天文台（HKO）開放數據 API 查詢香港天氣。
+
+## 功能
+
+- 全港即時天氣（`rhrread`）
+- 分區 / 監測站氣溫、降雨（`rhrread`）
+- 本地天氣預報概況（`flw`）
+- 九天預報（`fnd`）
+- 天氣警告摘要（`warnsum`）
+
+> 資料來源：香港天文台（HKO）
+
+## 使用（本地測試腳本）
+
+```bash
+# 全港即時天氣
+python3 scripts/fetch_weather.py --type current
+
+# 指定地區（監測站）
+python3 scripts/fetch_weather.py --type regional --location 沙田
+
+# 九天預報
+python3 scripts/fetch_weather.py --type forecast --days 9
+
+# 本地天氣預報（概況）
+python3 scripts/fetch_weather.py --type hourly
+
+# 天氣警告
+python3 scripts/check_warnings.py
+```
+
+## Skill 用法
+
+見 `SKILL.md`（Skill name：`hk-weather-hko`）。
+
+## Tests
+
+```bash
+python3 tests/run_tests.py
+```
+
+## 條款與免責
+
+見 `references/terms-and-attribution.md`。
+
+## License
+
+MIT（見 `LICENSE`）
